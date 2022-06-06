@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  defaultTitle: 'GameDev',
   backendUrl: 'localhost:8092'    // for testing locally
 };
 
