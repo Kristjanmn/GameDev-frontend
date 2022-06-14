@@ -10,12 +10,16 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AppHeaderComponent} from "./component/app-header/app-header.component";
 import {IndexComponent} from "./component/index/index.component";
 import {PageNotFoundComponent} from "./component/page-not-found/page-not-found.component";
+import {ProjectComponent} from "./component/project/project.component";
+import {NewProjectComponent} from "./component/new-project/new-project.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     AppHeaderComponent,
     IndexComponent,
+    NewProjectComponent,
+    ProjectComponent,
 
     // error 404 - page not found
     PageNotFoundComponent

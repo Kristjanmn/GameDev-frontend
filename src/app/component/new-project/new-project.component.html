@@ -1,0 +1,35 @@
+<ng-container>
+  <div align="center">
+    <h1>Create new project</h1><br>
+    <form [formGroup]="projectForm" (ngSubmit)="create()" novalidate>
+      <p>Project title, this can be changed later</p>
+      <p>Project ID is used to access your project by URL.<br>This value can be changed later. If left empty a Project ID will be assigned automatically.<br>
+        This must not contain any spaces or special characters besides underscore, which will be changed automatically</p>
+      <mat-form-field appearance="outline">
+        <mat-label>Project title</mat-label>
+        <input matInput formControlName="title">
+        <mat-error *ngIf="errorHandling('title', 'required')">
+          Please enter your project's title
+        </mat-error>
+<!--        <mat-error *ngIf="errorHandling('title', 'minlength')">-->
+<!--          Project title too short (min. {{this.titleMinLength}} characters)-->
+<!--        </mat-error>-->
+<!--        <mat-error *ngIf="errorHandling('title', 'maxlength')">-->
+<!--          Project title too long (max. {{this.titleMaxLength}} characters)-->
+<!--        </mat-error>-->
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="outline">
+        <mat-label>Project ID</mat-label>
+        <input matInput formControlName="projectId">
+        <mat-error *ngIf="errorHandling('projectId', 'minlength')">
+          Project ID can be empty or min. {{this.projectIdMinLength}} characters long
+        </mat-error>
+        <mat-error *ngIf="errorHandling('projectId', 'maxlength')">
+          Project ID can be empty or max. {{this.projectIdMaxLength}} characters long
+        </mat-error>
+      </mat-form-field>
+      <br><br><button mat-raised-button>Create project</button>
+    </form>
+  </div>
+</ng-container>
