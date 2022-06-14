@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {CustomResponse} from "../model/customResponse";
 import {Project} from "../model/project";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,9 @@ export class ProjectService {
 
   getProjectDialogs(projectDatabaseId: string): void {
     //
+  }
+
+  saveProject(project: Project): Observable<CustomResponse> {
+    return this.http.post<CustomResponse>(`${this.baseUrl}/saveProject/`, project);
   }
 }
