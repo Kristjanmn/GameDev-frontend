@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   defaultTitle: 'GameDev',
-  backendUrl: 'localhost:8092'    // for testing locally
+  backendUrl: 'http://localhost:8092'    // for testing locally, must be http, not https
 };
 
 /*
