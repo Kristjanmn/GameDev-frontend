@@ -4,4 +4,5 @@ export interface Dialog {
   id: string;
   dialogId: string;
   lines: DialogLine[];
+  comment: string;
 }

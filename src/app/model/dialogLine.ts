@@ -9,4 +9,6 @@ export interface DialogLine {
   waitTime: number;
   lineText: string;
   script: Script[];
+  locked: boolean;
+  comment: string;
 }
