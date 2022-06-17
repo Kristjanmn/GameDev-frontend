@@ -3,10 +3,13 @@ import {Project} from "../../model/project";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProjectService} from "../../service/project.service";
 import {Dialog} from "../../model/dialog";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {Quest} from "../../model/quest";
 import {Script} from "../../model/script";
 import {Cue} from "../../model/cue";
+import {DialogService} from "../../service/dialog.service";
+import {QuestService} from "../../service/quest.service";
+import {ScriptService} from "../../service/script.service";
 
 @Component({
   selector: 'project',
@@ -21,7 +24,11 @@ export class ProjectComponent implements OnInit{
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private projectService: ProjectService) {
+              private projectService: ProjectService,
+              private dialogService: DialogService,
+              private questService: QuestService,
+              private scriptService: ScriptService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -42,6 +49,9 @@ export class ProjectComponent implements OnInit{
         } else {
           this.project = <Project>response.object;
           this.getDialogs(this.project.id);
+          this.getQuests(this.project.id);
+          this.getScripts(this.project.id);
+          this.getCues(this.project.id);
         }
       });
   }
@@ -49,14 +59,103 @@ export class ProjectComponent implements OnInit{
   /**
    * Project's database ID, NOT projectId
    *
-   * @param projectId project's database ID
+   * @param projectDatabaseId project's database ID
    */
-  getDialogs(projectId: string): void {
-    this.projectService.getProjectDialogs(projectId)
+  getDialogs(projectDatabaseId: string): void {
+    this.dialogService.getDialogs(projectDatabaseId)
       .subscribe(response => {
         if (response.success) this.dialogs = <Dialog[]>response.object;
         else this.dialogs = [];
       });
+  }
+
+  /**
+   * Project's database ID, NOT projectId
+   *
+   * @param projectDatabaseId project's database ID
+   */
+  getQuests(projectDatabaseId: string): void {
+    this.questService.getQuests(projectDatabaseId)
+      .subscribe(response => {
+        if (response.success) this.quests = <Quest[]>response.object;
+        else this.dialogs = [];
+      });
+  }
+
+  /**
+   * Project's database ID, NOT projectId
+   *
+   * @param projectDatabaseId project's database ID
+   */
+  getScripts(projectDatabaseId: string): void {
+    this.scriptService.getScripts(projectDatabaseId)
+      .subscribe(response => {
+        if (response.success) this.scripts = <Script[]>response.object;
+        else this.dialogs = [];
+      });
+  }
+
+  /**
+   * Project's database ID, NOT projectId
+   *
+   * @param projectDatabaseId project's database ID
+   */
+  getCues(projectDatabaseId: string): void {
+    this.dialogService.getDialogs(projectDatabaseId)
+      .subscribe(response => {
+        if (response.success) this.cues = <Cue[]>response.object;
+        else this.dialogs = [];
+      });
+  }
+
+  // Dialog windows
+
+  openNewDialogDialog(): void {
+    const dialogRef = this.dialog.open(NewDialogDialog, {
+      data: {
+        dialogId: '',
+        comment: ''
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    })
+  }
+
+  openNewQuestDialog(): void {
+    const dialogRef = this.dialog.open(NewQuestDialog, {
+      data: {
+        dialogId: '',
+        comment: ''
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    })
+  }
+
+  openNewScriptDialog(): void {
+    const dialogRef = this.dialog.open(NewScriptDialog, {
+      data: {
+        dialogId: '',
+        comment: ''
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    })
+  }
+
+  openNewCueDialog(): void {
+    const dialogRef = this.dialog.open(NewCueDialog, {
+      data: {
+        dialogId: '',
+        comment: ''
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    })
   }
 }
 

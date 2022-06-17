@@ -1,12 +1,37 @@
-project
-https://material.angular.io/components/tabs/examples
+
 <ng-container>
-  tag group 1
-  <mat-tab-group style="height: fit-content" animationDuration="0ms">
-    <mat-tab label="Project">Project</mat-tab>
-    <mat-tab label="Dialog">Dialog</mat-tab>
-    <mat-tab label="Quest">Quest</mat-tab>
-    <mat-tab label="Script">Script</mat-tab>
-    <mat-tab label="Cue">Cue</mat-tab>
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab label="Project">
+      Project<br>
+      https://material.angular.io/components/tabs/examples
+    </mat-tab>
+    <mat-tab label="Dialog">
+      <button mat-raised-button (click)="openNewDialogDialog()">New Dialog</button>
+      <p *ngIf="!dialogs || dialogs.length == 0">No dialogs found</p>
+      <mat-tab-group animationDuration="0ms" *ngFor="let dialog of dialogs">
+        <mat-tab label="{{dialog.dialogId}}">{{dialog.dialogId}}</mat-tab>
+      </mat-tab-group>
+    </mat-tab>
+    <mat-tab label="Quest">
+      <button mat-raised-button (click)="openNewQuestDialog()">New Quest</button>
+      <p *ngIf="!quests || quests.length == 0">No quests found</p>
+      <mat-tab-group animationDuration="0ms" *ngFor="let quest of quests">
+        <mat-tab label="{{quest.questId}}">{{quest.questId}}</mat-tab>
+      </mat-tab-group>
+    </mat-tab>
+    <mat-tab label="Script">
+      <button mat-raised-button (click)="openNewScriptDialog()">New Script</button>
+      <p *ngIf="!scripts || scripts.length == 0">No scripts found</p>
+      <mat-tab-group animationDuration="0ms" *ngFor="let script of scripts">
+        <mat-tab label="{{script.name}}">{{script.name}}</mat-tab>
+      </mat-tab-group>
+    </mat-tab>
+    <mat-tab label="Cue">
+      <button mat-raised-button (click)="openNewCueDialog()">New Cue</button>
+      <p *ngIf="!cues || cues.length == 0">No cues found</p>
+      <mat-tab-group animationDuration="0ms" *ngFor="let cue of cues">
+        <mat-tab label="{{cue.cueId}}">{{cue.cueId}}</mat-tab>
+      </mat-tab-group>
+    </mat-tab>
   </mat-tab-group>
 </ng-container>
