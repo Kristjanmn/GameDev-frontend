@@ -8,3 +8,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   width: 100%;
   z-index: 99;
 }
+
+.valueNotAvailable {
+  color: red;
+  font-weight: bold;
+}
+
+.maxWidth-250 {
+  min-width: 250px;
+}
+
+.dialog-window {
+  padding: 20px;
+}
