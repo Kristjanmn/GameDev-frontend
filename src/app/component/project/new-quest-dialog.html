@@ -1,0 +1,22 @@
+<div class="dialog-window">
+  <h2>New Quest</h2>
+  <mat-form-field appearance="outline">
+    <mat-label>Quest ID</mat-label>
+    <input matInput [(ngModel)]="data.questId" required>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="outline">
+    <mat-label>Title</mat-label>
+    <input matInput [(ngModel)]="data.title" required>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="outline">
+    <mat-label>Comment</mat-label>
+    <textarea matInput [(ngModel)]="data.comment"></textarea>
+  </mat-form-field>
+  <br>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">Cancel</button>
+    <button mat-raised-button [mat-dialog-close]="data">Create</button>
+  </div>
+</div>
