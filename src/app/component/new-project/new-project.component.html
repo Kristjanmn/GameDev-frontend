@@ -21,7 +21,7 @@
       <br>
       <mat-form-field appearance="outline">
         <mat-label>Project ID</mat-label>
-        <input matInput formControlName="projectId">
+        <input matInput formControlName="projectId" (change)="updateProjectIdValue()">
         <mat-error *ngIf="errorHandling('projectId', 'minlength')">
           Project ID can be empty or min. {{this.projectIdMinLength}} characters long
         </mat-error>
@@ -29,7 +29,13 @@
           Project ID can be empty or max. {{this.projectIdMaxLength}} characters long
         </mat-error>
       </mat-form-field>
-      <br><br><button mat-raised-button>Create project</button>
+      <br>
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+      <br><br><button mat-raised-button [disabled]="!projectIdAvailable">Create project</button>
+      <p class="valueNotAvailable" [hidden]="projectIdAvailable">Project ID is not available</p>
     </form>
   </div>
 </ng-container>

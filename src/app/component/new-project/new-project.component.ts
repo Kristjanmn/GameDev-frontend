@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {ProjectService} from "../../service/project.service";
 import {Project} from "../../model/project";
+import {GlobalService} from "../../service/global.service";
 
 @Component({
   selector: 'new-project',
@@ -20,8 +21,10 @@ export class NewProjectComponent implements OnInit {
   titleMaxLength = 6;
   projectIdMinLength = 4;
   projectIdMaxLength = 6;
+  projectIdAvailable = true;
 
   constructor(private router: Router,
+              private globalService: GlobalService,
               private projectService: ProjectService,
               private formBuilder: FormBuilder) {
   }
@@ -48,15 +51,32 @@ export class NewProjectComponent implements OnInit {
   }
 
   create(): void {
-    this.newProject.projectId = this.projectForm.value.projectId;
-    this.newProject.title = this.projectForm.value.title;
-    this.newProject.description = this.projectForm.value.description;
+    this.newProject.projectId = this.globalService.oneWord(this.projectForm.value.projectId);
+    this.newProject.title = this.projectForm.value.title.trim();
+    this.newProject.description = this.projectForm.value.description.trim();
     if (this.newProject.title != "")
       this.projectService.saveProject(this.newProject)
         .subscribe(response => {
           if (!response.success)
             // Error
-            return;
+            console.log(response.message);
         });
+  }
+
+  updateProjectIdAvailable(): void {
+    if (this.projectForm.value.projectId.trim() == "") this.projectIdAvailable = true;
+    else this.projectService.checkProjectIdAvailable(this.projectForm.value.projectId)
+      .subscribe(response => {
+        this.projectIdAvailable = response.success;
+      });
+  }
+
+  updateProjectIdValue(): void {
+    this.projectForm.setValue({
+      title: this.projectForm.value.title,
+      projectId: this.globalService.oneWord(this.projectForm.value.projectId),
+      description: this.projectForm.value.description
+    });
+    this.updateProjectIdAvailable();
   }
 }
