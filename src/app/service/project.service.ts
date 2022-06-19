@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {Router} from "@angular/router";
 import {CustomResponse} from "../model/customResponse";
 import {Project} from "../model/project";
 import {Observable} from "rxjs";
@@ -21,5 +20,9 @@ export class ProjectService {
 
   saveProject(project: Project): Observable<CustomResponse> {
     return this.http.post<CustomResponse>(`${this.baseUrl}/saveProject`, project);
+  }
+
+  checkProjectIdAvailable(projectId: string): Observable<CustomResponse> {
+    return this.http.get<CustomResponse>(`${this.baseUrl}/checkIdAvailable/${projectId}`);
   }
 }
