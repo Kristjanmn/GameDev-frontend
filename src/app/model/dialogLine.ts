@@ -1,7 +1,6 @@
 import {Script} from "./script";
 
 export interface DialogLine {
-  id: string;
   lineId: string;
   nextLine: string;
   choices: string[];
