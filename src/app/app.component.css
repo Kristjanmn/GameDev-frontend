@@ -3,12 +3,25 @@
 }
 :host /deep/ .mat-tab-header {
   border-bottom: none;
+  text-align: end;
 }
 :host /deep/ .mat-tab-header-pagination {
   display: none !important;
+  color: red;
 }
 :host /deep/ .mat-tab-labels {
   flex-direction: column;
+}
+:host /deep/ .mat-tab-label {
+  padding: 0px 10px !important;
+  justify-content: left !important;
+  width: 200px;
+}
+:host /deep/ .mat-tab-label:hover {
+  background-color: RGBA(200,200,200,50)
+}
+:host /deep/ .mat-tab-label-active {
+  //color: pink;
 }
 :host /deep/ .mat-ink-bar {
   height: 100%;
