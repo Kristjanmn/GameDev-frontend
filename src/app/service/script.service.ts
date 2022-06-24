@@ -25,4 +25,8 @@ export class ScriptService {
   saveScript(script: Script): Observable<CustomResponse> {
     return this.http.post<CustomResponse>(`${this.baseUrl}/saveScript`, script);
   }
+
+  checkScriptNameAvailable(scriptName: string): Observable<CustomResponse> {
+    return this.http.get<CustomResponse>(`${this.baseUrl}/checkIdAvailable/${scriptName}`);
+  }
 }
