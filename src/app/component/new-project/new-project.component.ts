@@ -59,7 +59,11 @@ export class NewProjectComponent implements OnInit {
         .subscribe(response => {
           if (!response.success)
             // Error
-            console.log(response.message);
+            window.alert(response.message);
+          else {
+            let project = <Project>response.object;
+            this.router.navigate([project.projectId]);
+          }
         });
   }
 
