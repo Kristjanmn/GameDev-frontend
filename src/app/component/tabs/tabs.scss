@@ -1,0 +1,61 @@
+.tab-pane {
+  padding: 1em;
+}
+
+.tab-active {
+  background-color: darkgray;
+}
+
+.tab-closed {
+  //background-color: gray;
+}
+
+.tab {
+  text-align: left;
+}
+
+.tab:hover {
+  background-color: gray;
+}
+
+// not used anymore
+.tab button {
+  text-align: left;
+  width: 100%;
+  border-radius: 0;
+}
+
+.tab-global-item {
+  background-color: RGBA(0, 255, 0, 0.2);
+}
+
+.tab-content {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin-left: 200px;
+}
+
+// not used anymore?
+.tabs {
+  //width: fit-content;
+  //height: fit-content;
+  ////position: fixed;
+  //top: 0;
+  //bottom: 0;
+  //left: 0;
+  //z-index: 1;
+  //overflow-x: hidden;
+}
+
+.sidenav-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.sidenav-container-root {
+  top: 64px;    // header height
+}
