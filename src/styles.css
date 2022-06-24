@@ -2,6 +2,7 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+[hidden] { display: none !important; }
 
 .loading-container {
   position: fixed;
@@ -10,7 +11,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .valueNotAvailable {
-  color: red;
+  color: #ff0000;
   font-weight: bold;
 }
 
