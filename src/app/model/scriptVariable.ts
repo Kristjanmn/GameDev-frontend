@@ -1,4 +1,4 @@
 export interface ScriptVariable {
-  type: string;
-  name: string;
+  variableType: string;
+  variableName: string;
 }
