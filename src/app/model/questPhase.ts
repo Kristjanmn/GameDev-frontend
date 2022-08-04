@@ -6,4 +6,5 @@ export interface QuestPhase {
   description: string;
   script: Script[];
   comment: string;
+  zOrder: number;
 }
