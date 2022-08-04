@@ -26,6 +26,10 @@ export class ScriptService {
     return this.http.post<CustomResponse>(`${this.baseUrl}/saveScript`, script);
   }
 
+  getScriptById(scriptDatabaseId: string): Observable<CustomResponse> {
+    return this.http.get<CustomResponse>(`${this.baseUrl}/getById/${scriptDatabaseId}`);
+  }
+
   checkScriptNameAvailable(scriptName: string): Observable<CustomResponse> {
     return this.http.get<CustomResponse>(`${this.baseUrl}/checkIdAvailable/${scriptName}`);
   }
