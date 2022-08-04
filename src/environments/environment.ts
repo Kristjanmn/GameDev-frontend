@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  defaultTitle: 'GameDev',
+  defaultTitle: 'Dialog & Quest',
   backendUrl: 'http://localhost:8092',    // for testing locally, must be http, not https
   newProjectUrl: 'new-project'
 };
