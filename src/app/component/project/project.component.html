@@ -1,37 +1,59 @@
-
+<!--https://material.angular.io/components/tabs/examples-->
 <ng-container>
-  <mat-tab-group animationDuration="0ms">
-    <mat-tab label="Project">
-      Project<br>
-      https://material.angular.io/components/tabs/examples
-    </mat-tab>
-    <mat-tab label="Dialog">
-      <button mat-raised-button (click)="openNewDialogDialog()">New Dialog</button>
-      <p *ngIf="!dialogs || dialogs.length == 0">No dialogs found</p>
-      <mat-tab-group animationDuration="0ms" *ngFor="let dialog of dialogs">
-        <mat-tab label="{{dialog.dialogId}}">{{dialog.dialogId}}</mat-tab>
-      </mat-tab-group>
-    </mat-tab>
-    <mat-tab label="Quest">
-      <button mat-raised-button (click)="openNewQuestDialog()">New Quest</button>
-      <p *ngIf="!quests || quests.length == 0">No quests found</p>
-      <mat-tab-group animationDuration="0ms" *ngFor="let quest of quests">
-        <mat-tab label="{{quest.questId}}">{{quest.questId}}</mat-tab>
-      </mat-tab-group>
-    </mat-tab>
-    <mat-tab label="Script">
-      <button mat-raised-button (click)="openNewScriptDialog()">New Script</button>
-      <p *ngIf="!scripts || scripts.length == 0">No scripts found</p>
-      <mat-tab-group animationDuration="0ms" *ngFor="let script of scripts">
-        <mat-tab label="{{script.name}}">{{script.name}}</mat-tab>
-      </mat-tab-group>
-    </mat-tab>
-    <mat-tab label="Cue">
-      <button mat-raised-button (click)="openNewCueDialog()">New Cue</button>
-      <p *ngIf="!cues || cues.length == 0">No cues found</p>
-      <mat-tab-group animationDuration="0ms" *ngFor="let cue of cues">
-        <mat-tab label="{{cue.cueId}}">{{cue.cueId}}</mat-tab>
-      </mat-tab-group>
-    </mat-tab>
-  </mat-tab-group>
+  <h1 align="center" *ngIf="!this.project"><br><br><br>Loading project...</h1>
+  <tabs *ngIf="this.project" [rootTabs]="true">
+
+<!--    Project-->
+    <tab tabTitle="Project">
+      <project-form *ngIf="this.project" [project]="this.project"></project-form>
+    </tab>
+
+<!--    Dialog-->
+    <tab tabTitle="Dialog">
+      <tabs>
+        <tab tabTitle="New Dialog">
+          <dialog-form [dialog]="this.newDialog"></dialog-form>
+        </tab>
+        <tab *ngFor="let dialog of dialogs" tabTitle="{{dialog.dialogId}}">
+          <dialog-form [dialog]="dialog"></dialog-form>
+        </tab>
+      </tabs>
+    </tab>
+
+<!--    Quest-->
+    <tab tabTitle="Quest">
+      <tabs>
+        <tab tabTitle="New Quest">
+          <quest-form [quest]="this.newQuest"></quest-form>
+        </tab>
+        <tab *ngFor="let quest of quests" tabTitle="{{quest.questId}}">
+          <quest-form (onNewQuestSaved)="onNewQuestSaved($event)" [quest]="quest"></quest-form>
+        </tab>
+      </tabs>
+    </tab>
+
+<!--    Script-->
+    <tab tabTitle="Script">
+      <tabs>
+        <tab tabTitle="New Script">
+          <script-form [script]="this.newScript"></script-form>
+        </tab>
+        <tab *ngFor="let script of scripts" tabTitle="{{script.name}}" [globalItem]="script.global">
+          <script-form (onNewScriptSaved)="onNewScriptSaved($event)" [script]="script"></script-form>
+        </tab>
+      </tabs>
+    </tab>
+
+<!--    Cue-->
+    <tab tabTitle="Cue">
+      <tabs>
+        <tab tabTitle="New Cue">
+          <cue-form [cue]="this.newCue"></cue-form>
+        </tab>
+        <tab *ngFor="let cue of cues" tabTitle="{{cue.cueId}}">
+          <cue-form [cue]="cue"></cue-form>
+        </tab>
+      </tabs>
+    </tab>
+  </tabs>
 </ng-container>
