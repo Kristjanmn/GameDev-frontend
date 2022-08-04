@@ -1,0 +1,67 @@
+<div>
+  Temporary design!<br>
+  <p class="warning" [hidden]="idAvailable">Warning: Another Quest with same Quest ID already exists! This may lead to problems in future.</p>
+  <mat-form-field appearance="outline">
+    <mat-label>Quest ID</mat-label>
+    <input matInput [(ngModel)]="this.inputQuestId" (change)="updateIdAvailable()" required>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Title</mat-label>
+    <input matInput [(ngModel)]="this.inputTitle" required>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Comment</mat-label>
+    <input matInput [(ngModel)]="this.inputComment">
+  </mat-form-field><br>
+  <button mat-raised-button [disabled]="inputQuestId.trim().length == 0 || inputTitle.trim().length == 0" (click)="save()">Save</button>
+  <button mat-raised-button (click)="testSave()">TEST</button>
+  <button mat-raised-button [hidden]="quest.id.length == 0" (click)="reload()" style="background-color: red">Revert changes</button><br><br>
+
+  <div>
+    <mat-table [dataSource]="dataSource" cdkDropList (cdkDropListDropped)="drop($event)">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+        <mat-cell *matCellDef="let row; let i = index">
+          <input matInput
+                 [(ngModel)]="row.phaseId"
+                 [disabled]="row.phaseId.toUpperCase() == 'INIT'.toUpperCase()"
+                 (change)="onTableIdChanged(i, row.phaseId)"
+                 type="text">
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+        <mat-cell *matCellDef="let row; let i = index">
+          <input matInput
+                 [(ngModel)]="row.description"
+                 type="text">
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="script">
+        <mat-header-cell *matHeaderCellDef>Script</mat-header-cell>
+        <mat-cell *matCellDef="let row; let i = index">
+          <input matInput
+                 [(ngModel)]="row.script"
+                 type="text">
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="comment">
+        <mat-header-cell *matHeaderCellDef>Comment</mat-header-cell>
+        <mat-cell *matCellDef="let row; let i = index">
+          <input matInput
+                 [(ngModel)]="row.comment"
+                 type="text">
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns" [cdkDragDisabled]="row.phaseId == 'INIT'" cdkDrag></mat-row>
+    </mat-table><br>
+    <button mat-raised-button (click)="addPhase()" class="btn btn-primary">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+        <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+      </svg>
+      &#9;Add phase
+    </button>
+  </div>
+</div>

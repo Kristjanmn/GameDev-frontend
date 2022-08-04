@@ -1,0 +1,20 @@
+<div>
+  Temporary design!<br>
+  <label>
+    Project ID
+    <input [(ngModel)]="inputProjectId" (change)="updateIdAvailable()">
+  </label><br>
+  <label>
+    Title/Name
+    <input [(ngModel)]="inputTitle">
+  </label><br>
+  <label>
+    Description
+    <textarea [(ngModel)]="inputDescription"></textarea>
+  </label><br>
+  <button [disabled]="!this.idAvailable" mat-raised-button (click)="saveProject()">Save</button>
+  <button mat-raised-button (click)="revertChanges()" style="background-color: red">Revert changes</button>
+  <br><br>
+  <p>Potential features:<br>
+  import and export C++ file for scripts</p>
+</div>

@@ -1,0 +1,59 @@
+<div>
+  <div [hidden]="script.global">
+    <label>Name</label>
+    <input [(ngModel)]="inputName" (change)="updateScriptNameAvailable()">
+    <div *ngIf="!scriptNameAvailable">Warning: Another script with same name already exists.</div>
+  </div>
+  {{script.name}}<br>
+  {{script.comment}}<br>
+  <div *ngFor="let scrVar of script.variables">
+    {{scrVar.name}}::{{scrVar.type}}
+  </div>
+  <button mat-raised-button [hidden]="script.global" [disabled]="script.global || inputName.trim().length == 0">Save</button><br>
+  <p [hidden]="!script.global">You are not allowed to edit GLOBAL scripts! (marked in green)</p>
+  <br><br>----- NEW -----<br><br>
+  <p>For Unreal projects please follow official Unreal Engine
+    <a href="https://docs.unrealengine.com/4.27/en-US/ProductionPipelines/DevelopmentSetup/CodingStandard/"
+       target="_blank">Coding Standard</a>!</p>
+  <p>Example function in Unreal<br>
+    {{this.currentScript}}</p><br>
+  <div [hidden]="script.global">
+    <p class="warning" [hidden]="scriptNameAvailable">Warning: Another script with same name already exists.<br>
+      Please make sure there won't be any conflicts in your project due to that.</p>
+    <mat-form-field appearance="outline">
+      <mat-label>Script name</mat-label>
+      <input matInput [(ngModel)]="this.inputName" (change)="updateScriptNameAvailable()" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Comment</mat-label>
+      <input matInput [(ngModel)]="this.inputComment" (change)="updateScriptNameAvailable()">
+    </mat-form-field>
+    <button mat-raised-button (click)="revertChanges()" style="background-color: red">Revert changes</button><br><br>
+
+    <div>
+      <mat-table [dataSource]="dataSource" cdkDropList (cdkDropListDropped)="drop($event)">
+        <ng-container matColumnDef="type">
+          <mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+          <mat-cell *matCellDef="let row; let i = index">
+            <input matInput [(ngModel)]="row.type" type="text">
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+          <mat-cell *matCellDef="let row; let i = index">
+            <input matInput [(ngModel)]="row.name" type="text">
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table><br>
+      <button mat-raised-button (click)="addVariable()" class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+          <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+        </svg>
+        &#9;Add variable
+      </button>
+    </div>
+  </div>
+</div>
